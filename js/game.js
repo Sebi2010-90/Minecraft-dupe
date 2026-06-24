@@ -4,7 +4,10 @@ class MinecraftGame {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.world = new World(12345);
-        this.player = new Player(50, 100, 50);
+        
+        // Spawn player on ground level
+        const spawnY = 95; // Ground level (terrain is generated around 70-90)
+        this.player = new Player(50, spawnY, 50);
         this.combat = new CombatSystem(this.world, this.player);
         this.renderer = new Renderer(this.canvas, this.world, this.player);
         
@@ -20,6 +23,12 @@ class MinecraftGame {
         
         this.lastTime = Date.now();
         this.infoVisible = true;
+        
+        // Initialize mobile controls if on touch device
+        this.mobileControls = null;
+        if (typeof MobileControls !== 'undefined') {
+            this.mobileControls = new MobileControls(this);
+        }
         
         this.setupEventListeners();
         this.gameLoop();
