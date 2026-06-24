@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Dupe - Open World</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <div id="hud">
+        <div id="health-bar" class="hud-element">
+            <div class="health-text">❤️ Health: <span id="health-value">20</span>/20</div>
+            <div class="health-bar-bg">
+                <div id="health-bar-fill" class="health-bar-fill"></div>
+            </div>
+        </div>
+        <div id="inventory" class="hud-element">
+            <h3>Inventory</h3>
+            <div id="inventory-items"></div>
+        </div>
+        <div id="selected-block" class="hud-element">
+            <div>Selected: <span id="selected-block-name">Dirt</span></div>
+        </div>
+        <div id="position" class="hud-element">
+            <div id="pos-text">X: 0 Y: 0 Z: 0</div>
+        </div>
+    </div>
+    <div id="info" class="info-box">
+        <h2>Minecraft Dupe</h2>
+        <p><strong>Steuerung:</strong></p>
+        <p>WASD - Bewegen | SPACE - Springen | Maus - Blick | Linksklick - Abbauen | Rechtsklick - Platzieren</p>
+        <p>1-9 - Block wählen | P - Info</p>
+    </div>
+    <script src="js/world.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/blocks.js"></script>
+    <script src="js/combat.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

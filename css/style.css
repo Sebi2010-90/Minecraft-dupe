@@ -1,0 +1,192 @@
+:root {
+    --primary-color: #1a1a1a;
+    --secondary-color: #2d2d2d;
+    --accent-color: #4CAF50;
+    --text-color: #ffffff;
+    --health-color: #ff4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+}
+
+#hud {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.hud-element {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--accent-color);
+    border-radius: 4px;
+    width: fit-content;
+    max-width: 300px;
+}
+
+#health-bar {
+    width: 250px;
+}
+
+.health-text {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.health-bar-bg {
+    width: 100%;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--accent-color);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.health-bar-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #ff4444, #ff8844);
+    transition: width 0.3s ease;
+}
+
+#inventory {
+    width: 300px;
+}
+
+#inventory h3 {
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+
+#inventory-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 5px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.inventory-item {
+    background-color: rgba(76, 175, 80, 0.3);
+    border: 1px solid var(--accent-color);
+    padding: 5px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.inventory-item:hover {
+    background-color: rgba(76, 175, 80, 0.6);
+    transform: scale(1.05);
+}
+
+.inventory-item.selected {
+    background-color: rgba(76, 175, 80, 0.9);
+    border-color: #ffff00;
+    font-weight: bold;
+}
+
+#selected-block {
+    font-weight: bold;
+}
+
+#position {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+#info {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 20px;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    max-width: 300px;
+    font-size: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+#info h2 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#info p {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* Crosshair */
+canvas::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    z-index: 101;
+    pointer-events: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    #hud {
+        font-size: 12px;
+    }
+    
+    .hud-element {
+        padding: 8px 10px;
+    }
+    
+    #info {
+        bottom: 10px;
+        right: 10px;
+        max-width: 250px;
+        font-size: 10px;
+    }
+}
