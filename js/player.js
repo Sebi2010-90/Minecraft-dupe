@@ -31,6 +31,7 @@ class Player {
         this.maxHealth = 20;
         this.hunger = 20;
         this.maxHunger = 20;
+        this.hungerRegenCooldown = 0;
         this.isJumping = false;
         
         // Inventory
@@ -84,6 +85,11 @@ class Player {
     
     heal(amount) {
         this.health = Math.min(this.maxHealth, this.health + amount);
+    }
+    
+    addHunger(amount) {
+        this.hunger = Math.min(this.maxHunger, this.hunger + amount);
+        this.hungerRegenCooldown = 0.5; // Reset cooldown
     }
     
     // Get forward direction vector
@@ -152,11 +158,28 @@ class Player {
         return false;
     }
     
-    // Update player physics
+    // Update player physics and systems
     update(deltaTime, world, input) {
         // Apply gravity
         if (!this.isOnGround) {
             this.vy -= this.gravity * deltaTime;
+        }
+        
+        // Hunger drain (approximately 1 hunger point per 30 seconds at normal activity)
+        this.hunger -= deltaTime * 0.033;
+        
+        // Starvation damage when hunger depleted
+        if (this.hunger <= 0) {
+            this.hunger = 0;
+            this.takeDamage(deltaTime * 0.5); // Lose health slowly
+        }
+        
+        // Clamp hunger
+        this.hunger = Math.max(0, Math.min(this.maxHunger, this.hunger));
+        
+        // Update hunger regen cooldown
+        if (this.hungerRegenCooldown > 0) {
+            this.hungerRegenCooldown -= deltaTime;
         }
         
         // Move horizontally
