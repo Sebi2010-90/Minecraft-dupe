@@ -156,6 +156,11 @@ class MinecraftGame {
         const healthPercent = Math.max(0, this.player.health) / this.player.maxHealth * 100;
         document.getElementById('health-bar-fill').style.width = healthPercent + '%';
         
+        // Hunger
+        const hungerPercent = Math.max(0, this.player.hunger) / this.player.maxHunger * 100;
+        document.getElementById('hunger-bar-fill').style.width = hungerPercent + '%';
+        document.getElementById('hunger-value').textContent = Math.max(0, Math.floor(this.player.hunger));
+        
         // Position
         document.getElementById('pos-text').textContent = 
             `X: ${Math.floor(this.player.x)} Y: ${Math.floor(this.player.y)} Z: ${Math.floor(this.player.z)}`;
